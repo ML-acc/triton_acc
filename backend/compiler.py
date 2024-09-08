@@ -8,11 +8,13 @@ from triton.backends.compiler import BaseBackend, GPUTarget
 
 @dataclass(frozen=True)
 class AccOptions:
+
     def __post_init__(self):
         pass
 
 
 class AccBackend(BaseBackend):
+
     @staticmethod
     def supports_target(target: GPUTarget):
         return target.backend == "acc"
@@ -40,15 +42,8 @@ class AccBackend(BaseBackend):
         # Note: We actually don't need any of these except for the name which is
         # used in the launch function in driver.py. Putting these in so we're
         # consistent with other backends
-        return (
-            metadata.num_warps,
-            metadata.num_ctas,
-            metadata.shared,
-            metadata.cluster_dims[0],
-            metadata.cluster_dims[1],
-            metadata.cluster_dims[2],
-            metadata.name
-        )
+        return (metadata.num_warps, metadata.num_ctas, metadata.shared, metadata.cluster_dims[0],
+                metadata.cluster_dims[1], metadata.cluster_dims[2], metadata.name)
 
     def add_stages(self, stages: dict, options: object) -> None:
         """

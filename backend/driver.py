@@ -1,7 +1,9 @@
 from triton.backends.driver import DriverBase
 from triton.backends.compiler import GPUTarget
 
+
 class AccUtils(object):
+
     def __new__(cls):
         if not hasattr(cls, "instance"):
             cls.instance = super(AccUtils, cls).__new__(cls)
@@ -10,24 +12,21 @@ class AccUtils(object):
     @staticmethod
     def get_device_properties(device):
         return {
-          "max_shared_mem": 192 * 1024,
-          "multiprocessor_count": None,
-          "sm_clock_rate": None,
-          "mem_clock_rate": None,
-          "mem_bus_width": None
+            "max_shared_mem": 192 * 1024, "multiprocessor_count": None, "sm_clock_rate": None, "mem_clock_rate": None,
+            "mem_bus_width": None
         }
 
     @staticmethod
     def load_binary(name, kernel_asm, shared, device):
-        return (
-          None,       # module
-          kernel_asm, # function
-          None,       # n_regs
-          None        # n_spills
-        )
+        return (None,  # module
+                kernel_asm,  # function
+                None,  # n_regs
+                None  # n_spills
+                )
 
 
 class AccLauncher(object):
+
     def __init__(self, src, metadata):
         pass
 
